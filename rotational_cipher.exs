@@ -16,27 +16,27 @@ defmodule RotationalCipher do
     Enum.join(list)
   end
 
+  @spec get_rotated_char(char :: String.t(), shift :: integer) :: integer
   def get_rotated_char(char, shift) do
     <<aacute::utf8>> = char
     cond do
       (aacute >= ?A && aacute <= ?Z) ->
-        a = aacute + shift
-        if a > ?Z do
-          a - ?Z + ?A - 1
-        else
-          a
-        end
+        util(aacute + shift, ?A, ?Z)
       (aacute >= ?a && aacute <= ?z) ->
-        a = aacute + shift
-        if a > ?z do
-          a - ?z + ?a - 1
-        else
-          a
-        end
+        util(aacute + shift, ?a, ?z)
       true ->
         aacute
     end
 
+  end
+
+  @spec util(a :: integer, b :: integer, c :: integer) :: integer
+  def util(a, b ,c) do
+      if a > c do
+        a - c + b - 1
+      else
+        a
+      end
   end
 
 end
