@@ -7,7 +7,7 @@ defmodule SubStringCheck do
     a = IO.gets("String 1: ")
     b = IO.gets("String 2: ")
 
-    if String.contains?(a, [b]) do
+    if String.contains?(String.trim(a), String.trim(b)) do
       IO.puts "String 2 is subset of string 1."
     else
       IO.puts "String 2 is not a subset of string 1."
