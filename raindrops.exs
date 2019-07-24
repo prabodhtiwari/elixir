@@ -22,7 +22,7 @@ defmodule Raindrops do
   def _check(factor, 0) do @map[factor] end
   def _check(factor, _) do "" end
 
-  def _retrun(string, number)  when string == "" do Integer.to_string(number) end
+  def _retrun("", number) do Integer.to_string(number) end
   def _retrun(string, _) do string end
 
 end
