@@ -19,14 +19,7 @@ defmodule Words do
 
   defp _split(sentence), do: String.split(sentence, [" ", "_"], trim: true )
 
-
-  defp _count_words(words) do
-    Enum.reduce(words, Map.new, &_count_word/2)
-  end
-
-  defp _count_word(word, words) do
-    Map.update(words, word, 1, fn(value) -> value + 1 end)
-  end
-
+  defp _count_words(words), do: Enum.reduce(words, Map.new, &_count_word/2)
+  defp _count_word(word, words), do: Map.update(words, word, 1, fn(value) -> value + 1 end)
 
 end
