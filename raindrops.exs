@@ -14,16 +14,13 @@ defmodule Raindrops do
   """
   @spec convert(pos_integer) :: String.t()
   def convert(number) do
-    Enum.map(Map.keys(@map), fn x -> _check(number, x) end)
+    Enum.map(Map.keys(@map), fn x -> _check(x, rem(number, x)) end)
     |> Enum.join("")
     |>_retrun(number)
   end
 
-  def _check(number, factor) do
-    if rem(number, factor) == 0 do
-      @map[factor]
-    end
-  end
+  def _check(factor, 0) do @map[factor] end
+  def _check(factor, _) do "" end
 
   def _retrun(string, number)  when string == "" do Integer.to_string(number) end
   def _retrun(string, _) do string end
