@@ -7,19 +7,19 @@ defmodule Words do
   @spec count(String.t()) :: map
   def count(sentence) do
     sentence
-    |> _remove
-    |> _lower_case
-    |> _split
-    |> _count_words
+    |> lower_case()
+    |> remove()
+    |> split()
+    |> count_words()
   end
 
-  defp _remove(sentence), do: String.replace(sentence, ~r/[^-_a-zA-Z0-9äöüÄÖÜ ]/, "")
+  defp lower_case(sentence), do:  String.downcase(sentence)
 
-  defp _lower_case(sentence), do:  String.downcase(sentence)
+  defp remove(sentence), do: String.replace(sentence, ~r/([^\w\- ])/u, "")
 
-  defp _split(sentence), do: String.split(sentence, [" ", "_"], trim: true )
+  defp split(sentence), do: String.split(sentence, ~r/[_ ]/, trim: true )
 
-  defp _count_words(words), do: Enum.reduce(words, Map.new, &_count_word/2)
-  defp _count_word(word, words), do: Map.update(words, word, 1, fn(value) -> value + 1 end)
+  defp count_words(words), do: Enum.reduce(words, Map.new, &count_word/2)
+  defp count_word(word, words), do: Map.update(words, word, 1, fn(value) -> value + 1 end)
 
 end
