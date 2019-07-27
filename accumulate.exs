@@ -18,7 +18,7 @@ defmodule Accumulate do
   @spec accumulate(list, (any -> any)) :: list
 
   def accumulate(list, f) do
-    Enum.map(list, fn x ->  f.(x) end)
+    for x <- list do f.(x) end
   end
 
 
