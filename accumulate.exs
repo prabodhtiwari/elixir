@@ -18,8 +18,11 @@ defmodule Accumulate do
   @spec accumulate(list, (any -> any)) :: list
 
   def accumulate(list, f) do
-    for x <- list do f.(x) end
+    util(list, f)
   end
 
+  defp util([], _), do: []
+
+  defp util([head | tail], f), do: [f.(head)] ++ util(tail, f)
 
 end
